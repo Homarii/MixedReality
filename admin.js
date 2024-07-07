@@ -1,7 +1,7 @@
 let imageData = [];
 
 async function loadImagesForAdmin() {
-    const response = await fetch('https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/images.json'); // Adjust path if necessary
+    const response = await fetch('https://github.com/Homarii/MixedReality/blob/main/images.json'); // Adjust path if necessary
     imageData = await response.json();
     const managementDiv = document.getElementById('image-management');
     managementDiv.innerHTML = '';
