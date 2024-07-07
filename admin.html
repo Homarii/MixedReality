@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Admin - Upload Photo</h1>
+    <h1>Admin - Upload Photos</h1>
     <form action="/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="photo" accept="image/*" required>
-        <input type="text" name="description" placeholder="Photo Description" required>
-        <button type="submit">Upload Photo</button>
+        <input type="file" name="photos" accept="image/*" multiple required>
+        <input type="text" name="description" placeholder="Common Photo Description" required>
+        <button type="submit">Upload Photos</button>
     </form>
-    <a href="/gallery">Go to Gallery</a>
+    <a href="/">Go to Gallery</a>
 </body>
 </html>
