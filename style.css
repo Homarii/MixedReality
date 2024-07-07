@@ -42,13 +42,11 @@ h1 {
 }
 
 .admin-photo-container input[type="text"] {
-    margin: 10px 0;
-    padding: 5px;
-    width: 80%;
+    margin-right: 10px;
 }
 
 .admin-photo-container input[type="checkbox"] {
-    margin-top: 10px;
+    margin-left: 10px;
 }
 
 button {

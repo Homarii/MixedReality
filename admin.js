@@ -1,8 +1,19 @@
 let imageData = [];
 
 async function loadImagesForAdmin() {
-    const response = await fetch('https://github.com/Homarii/MixedReality/blob/main/images.json'); // Adjust path if necessary
-    imageData = await response.json();
+    try {
+        const response = await fetch('images.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        imageData = await response.json();
+        displayImagesForAdmin();
+    } catch (error) {
+        console.error('Error loading images for admin:', error);
+    }
+}
+
+function displayImagesForAdmin() {
     const managementDiv = document.getElementById('image-management');
     managementDiv.innerHTML = '';
 
@@ -10,56 +21,39 @@ async function loadImagesForAdmin() {
         const imgElement = document.createElement('img');
         imgElement.src = image.url;
         imgElement.alt = image.caption;
-        
+        imgElement.style.maxWidth = '100px'; // Adjust as necessary
+
         const captionInput = document.createElement('input');
         captionInput.type = 'text';
         captionInput.value = image.caption;
         captionInput.oninput = (e) => imageData.images[index].caption = e.target.value;
-        
+
         const displayCheckbox = document.createElement('input');
         displayCheckbox.type = 'checkbox';
         displayCheckbox.checked = image.display;
         displayCheckbox.onchange = (e) => imageData.images[index].display = e.target.checked;
-        
+
         const container = document.createElement('div');
         container.classList.add('admin-photo-container');
         container.appendChild(imgElement);
+        container.appendChild(document.createTextNode(' Caption: '));
         container.appendChild(captionInput);
+        container.appendChild(document.createTextNode(' Display: '));
         container.appendChild(displayCheckbox);
-        
+
         managementDiv.appendChild(container);
     });
 }
 
-async function saveChanges() {
-    const token = 'YOUR_GITHUB_TOKEN'; // Replace with your GitHub token
-    const repo = 'YOUR_USERNAME/YOUR_REPO'; // Replace with your repo details
-    const filePath = 'images.json'; // Adjust path if necessary
-
-    const response = await fetch(`https://api.github.com/repos/${repo}/contents/${filePath}`, {
-        method: 'PUT',
-        headers: {
-            'Authorization': `token ${token}`,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            message: 'Update images metadata',
-            content: btoa(JSON.stringify(imageData)),
-            sha: await getFileSHA(repo, filePath) // Get the current file SHA for updating
-        })
-    });
-
-    if (!response.ok) {
-        alert(`Failed to save changes: ${response.statusText}`);
-    } else {
-        alert('Changes saved successfully!');
-    }
-}
-
-async function getFileSHA(repo, filePath) {
-    const response = await fetch(`https://api.github.com/repos/${repo}/contents/${filePath}`);
-    const data = await response.json();
-    return data.sha;
+function saveChanges() {
+    const blob = new Blob([JSON.stringify(imageData, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'images.json';
+    a.click();
+    URL.revokeObjectURL(url);
+    alert('Changes saved! Download the file and replace the existing images.json in your repository.');
 }
 
 document.addEventListener('DOMContentLoaded', loadImagesForAdmin);
