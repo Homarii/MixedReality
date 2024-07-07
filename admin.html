@@ -9,16 +9,23 @@
 </head>
 <body>
     <h1>Admin - Upload Photos</h1>
-    <div id="uploadForm">
+    <div id="loginForm">
+        <form onsubmit="return login();">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    <div id="uploadForm" style="display: none;">
         <form onsubmit="return uploadPhotos();">
             <input type="file" id="photos" accept="image/*" multiple required>
             <input type="text" id="description" placeholder="Common Photo Description" required>
             <button type="submit">Upload Photos</button>
         </form>
         <a href="index.html">Go to Gallery</a>
-    </div>
-    <div class="admin-gallery">
-        <!-- Admin photo groups will be added here -->
+        <div class="admin-gallery">
+            <!-- Admin photo groups will be added here -->
+        </div>
     </div>
 </body>
 </html>
