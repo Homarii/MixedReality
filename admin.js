@@ -1,100 +1,65 @@
-document.addEventListener('DOMContentLoaded', () => {
-    if (sessionStorage.getItem('loggedIn') !== 'true') {
-        window.location.href = 'admin-login.html';
+let imageData = [];
+
+async function loadImagesForAdmin() {
+    const response = await fetch('https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/images.json'); // Adjust path if necessary
+    imageData = await response.json();
+    const managementDiv = document.getElementById('image-management');
+    managementDiv.innerHTML = '';
+
+    imageData.images.forEach((image, index) => {
+        const imgElement = document.createElement('img');
+        imgElement.src = image.url;
+        imgElement.alt = image.caption;
+        
+        const captionInput = document.createElement('input');
+        captionInput.type = 'text';
+        captionInput.value = image.caption;
+        captionInput.oninput = (e) => imageData.images[index].caption = e.target.value;
+        
+        const displayCheckbox = document.createElement('input');
+        displayCheckbox.type = 'checkbox';
+        displayCheckbox.checked = image.display;
+        displayCheckbox.onchange = (e) => imageData.images[index].display = e.target.checked;
+        
+        const container = document.createElement('div');
+        container.classList.add('admin-photo-container');
+        container.appendChild(imgElement);
+        container.appendChild(captionInput);
+        container.appendChild(displayCheckbox);
+        
+        managementDiv.appendChild(container);
+    });
+}
+
+async function saveChanges() {
+    const token = 'YOUR_GITHUB_TOKEN'; // Replace with your GitHub token
+    const repo = 'YOUR_USERNAME/YOUR_REPO'; // Replace with your repo details
+    const filePath = 'images.json'; // Adjust path if necessary
+
+    const response = await fetch(`https://api.github.com/repos/${repo}/contents/${filePath}`, {
+        method: 'PUT',
+        headers: {
+            'Authorization': `token ${token}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            message: 'Update images metadata',
+            content: btoa(JSON.stringify(imageData)),
+            sha: await getFileSHA(repo, filePath) // Get the current file SHA for updating
+        })
+    });
+
+    if (!response.ok) {
+        alert(`Failed to save changes: ${response.statusText}`);
     } else {
-        loadAdminPhotos();
-    }
-});
-
-function uploadPhotos() {
-    const files = document.getElementById('photos').files;
-    const description = document.getElementById('description').value;
-
-    let photoData = JSON.parse(localStorage.getItem('photos')) || [];
-
-    Array.from(files).forEach(file => {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            photoData.push({
-                filename: file.name,
-                description: description,
-                data: e.target.result
-            });
-            localStorage.setItem('photos', JSON.stringify(photoData));
-            loadAdminPhotos(); // Refresh the admin gallery
-        };
-        reader.readAsDataURL(file);
-    });
-
-    alert('Photos uploaded successfully');
-    return false;
-}
-
-function loadAdminPhotos() {
-    let photos = JSON.parse(localStorage.getItem('photos')) || [];
-    displayAdminPhotos(photos);
-}
-
-function displayAdminPhotos(photos) {
-    const gallery = document.querySelector('.admin-gallery');
-    gallery.innerHTML = ''; // Clear existing photos
-    let currentGroup = null;
-    photos.forEach((photo, index) => {
-        if (!currentGroup || currentGroup.description !== photo.description) {
-            currentGroup = document.createElement('div');
-            currentGroup.classList.add('photo-group');
-            currentGroup.description = photo.description;
-
-            const description = document.createElement('div');
-            description.classList.add('description');
-            description.textContent = photo.description;
-            currentGroup.appendChild(description);
-
-            const editButton = document.createElement('button');
-            editButton.textContent = 'Edit Description';
-            editButton.onclick = () => editDescription(photo.description);
-            currentGroup.appendChild(editButton);
-
-            gallery.appendChild(currentGroup);
-        }
-
-        const photoDiv = document.createElement('div');
-        photoDiv.classList.add('photo');
-        
-        const img = document.createElement('img');
-        img.src = photo.data;
-        img.alt = photo.filename; // Adding alt attribute for better accessibility
-        photoDiv.appendChild(img);
-
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Delete';
-        deleteButton.onclick = () => deletePhoto(index);
-        photoDiv.appendChild(deleteButton);
-        
-        currentGroup.appendChild(photoDiv);
-    });
-}
-
-function editDescription(description) {
-    let photos = JSON.parse(localStorage.getItem('photos')) || [];
-    const newDescription = prompt("Enter new description:", description);
-    if (newDescription !== null) {
-        photos = photos.map(photo => {
-            if (photo.description === description) {
-                photo.description = newDescription;
-            }
-            return photo;
-        });
-        localStorage.setItem('photos', JSON.stringify(photos));
-        loadAdminPhotos(); // Refresh the admin gallery
+        alert('Changes saved successfully!');
     }
 }
 
-function deletePhoto(index) {
-    let photos = JSON.parse(localStorage.getItem('photos')) || [];
-    if (confirm("Are you sure you want to delete this photo?")) {
-        photos.splice(index, 1);
-        localStorage.setItem('photos', JSON.stringify(photos));
-        loadAdminPhotos(); // Refresh the admin gallery
-    }
+async function getFileSHA(repo, filePath) {
+    const response = await fetch(`https://api.github.com/repos/${repo}/contents/${filePath}`);
+    const data = await response.json();
+    return data.sha;
 }
+
+document.addEventListener('DOMContentLoaded', loadImagesForAdmin);

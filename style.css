@@ -24,7 +24,7 @@ h1 {
     max-width: 1000px;
 }
 
-.photo-group {
+.photo-container, .admin-photo-container {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 10px;
@@ -32,41 +32,23 @@ h1 {
     width: 100%;
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.photo-group .description {
-    font-weight: bold;
-    margin-bottom: 10px;
     text-align: center;
 }
 
-.photo-group .photo {
-    margin: 10px;
-    display: inline-block;
-    vertical-align: top;
-    width: calc(33.333% - 20px); /* Three photos per row, accounting for margins */
-    box-sizing: border-box;
-}
-
-.photo-group .photo img {
+.photo-container img, .admin-photo-container img {
     width: 100%;
     height: auto;
     border-radius: 8px;
 }
 
-.photo-group .photo button {
-    display: block;
-    margin: 5px 0;
-    width: 100%;
-    border-radius: 4px;
-    background-color: #dc3545;
-    color: #fff;
-    border: none;
-    cursor: pointer;
+.admin-photo-container input[type="text"] {
+    margin: 10px 0;
+    padding: 5px;
+    width: 80%;
 }
 
-.photo-group .photo button:hover {
-    background-color: #c82333;
+.admin-photo-container input[type="checkbox"] {
+    margin-top: 10px;
 }
 
 button {
@@ -84,29 +66,6 @@ button:hover {
     background-color: #0056b3;
 }
 
-.form-container {
-    margin: 20px;
-}
-
-.form-container input, .form-container button {
-    margin: 5px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1em;
-}
-
-.form-container button {
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-}
-
-.form-container button:hover {
-    background-color: #218838;
-}
-
 a {
     color: #007bff;
     text-decoration: none;
@@ -116,13 +75,8 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Responsive design for mobile devices */
 @media (max-width: 600px) {
-    .photo-group .photo {
-        width: 100%;
-        margin: 5px 0;
-    }
-    .gallery, .admin-gallery {
+    .photo-container, .admin-photo-container {
         width: 100%;
     }
 }

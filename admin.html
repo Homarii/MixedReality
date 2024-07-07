@@ -9,16 +9,10 @@
 </head>
 <body>
     <h1>Admin Dashboard</h1>
-    <div id="uploadForm">
-        <form onsubmit="return uploadPhotos();">
-            <input type="file" id="photos" accept="image/*" multiple required>
-            <input type="text" id="description" placeholder="Common Photo Description" required>
-            <button type="submit">Upload Photos</button>
-        </form>
-        <a href="index.html">Go to Gallery</a>
-        <div class="admin-gallery">
-            <!-- Admin photo groups will be added here -->
-        </div>
+    <div id="image-management">
+        <!-- Images will be loaded here -->
     </div>
+    <button onclick="saveChanges()">Save Changes</button>
+    <a href="index.html">Go to Gallery</a>
 </body>
 </html>

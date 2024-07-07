@@ -1,0 +1,14 @@
+{
+    "images": [
+        {
+            "url": "photos/photo1.jpg",
+            "caption": "Photo 1",
+            "display": true
+        },
+        {
+            "url": "photos/photo2.jpg",
+            "caption": "Photo 2",
+            "display": false
+        }
+    ]
+}
