@@ -8,19 +8,30 @@ async function loadImages() {
         const gallery = document.querySelector('.gallery');
         gallery.innerHTML = ''; // Clear existing images
 
-        imageData.images.forEach(image => {
-            if (image.display) {
-                const imgElement = document.createElement('img');
-                imgElement.src = image.url;
-                imgElement.alt = image.caption;
-                const captionElement = document.createElement('p');
-                captionElement.textContent = image.caption;
-                const container = document.createElement('div');
-                container.classList.add('photo-container');
-                container.appendChild(imgElement);
-                container.appendChild(captionElement);
-                gallery.appendChild(container);
-            }
+        imageData.groups.forEach(group => {
+            const groupContainer = document.createElement('div');
+            groupContainer.classList.add('group-container');
+
+            const descriptionElement = document.createElement('h2');
+            descriptionElement.textContent = group.description;
+            groupContainer.appendChild(descriptionElement);
+
+            group.images.forEach(image => {
+                if (image.display) {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = image.url;
+                    imgElement.alt = image.caption;
+                    const captionElement = document.createElement('p');
+                    captionElement.textContent = image.caption;
+                    const imageContainer = document.createElement('div');
+                    imageContainer.classList.add('photo-container');
+                    imageContainer.appendChild(imgElement);
+                    imageContainer.appendChild(captionElement);
+                    groupContainer.appendChild(imageContainer);
+                }
+            });
+
+            gallery.appendChild(groupContainer);
         });
     } catch (error) {
         console.error('Error loading images:', error);
