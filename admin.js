@@ -1,25 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
-    if (sessionStorage.getItem('loggedIn') === 'true') {
-        document.getElementById('loginForm').style.display = 'none';
-        document.getElementById('uploadForm').style.display = 'block';
+    if (sessionStorage.getItem('loggedIn') !== 'true') {
+        window.location.href = 'admin-login.html';
+    } else {
         loadAdminPhotos();
     }
 });
-
-function login() {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-
-    if (username === 'demo' && password === 'demo') {
-        sessionStorage.setItem('loggedIn', 'true');
-        document.getElementById('loginForm').style.display = 'none';
-        document.getElementById('uploadForm').style.display = 'block';
-        loadAdminPhotos();
-    } else {
-        alert('Invalid credentials');
-    }
-    return false;
-}
 
 function uploadPhotos() {
     const files = document.getElementById('photos').files;
@@ -108,4 +93,7 @@ function deletePhoto(index) {
     let photos = JSON.parse(localStorage.getItem('photos')) || [];
     if (confirm("Are you sure you want to delete this photo?")) {
         photos.splice(index, 1);
-   
+        localStorage.setItem('photos', JSON.stringify(photos));
+        loadAdminPhotos(); // Refresh the admin gallery
+    }
+}
