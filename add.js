@@ -1,5 +1,5 @@
 let imageData = { groups: [] };
-let newGroup = { description: '', images: [] };
+let newGroups = [];
 
 async function loadImagesForSelection() {
     try {
@@ -15,9 +15,8 @@ async function loadImagesForSelection() {
 }
 
 function displayImagesForSelection(photos) {
-    const imageSelectionDiv = document.getElementById('image-selection');
-    imageSelectionDiv.innerHTML = '';
-
+    const imageSelectionDiv = document.createElement('div');
+    imageSelectionDiv.classList.add('image-selection');
     photos.forEach(photo => {
         const imgElement = document.createElement('img');
         imgElement.src = `photos/${photo.name}`;
@@ -28,9 +27,9 @@ function displayImagesForSelection(photos) {
         selectCheckbox.type = 'checkbox';
         selectCheckbox.onchange = (e) => {
             if (e.target.checked) {
-                newGroup.images.push({ url: `photos/${photo.name}`, caption: '', display: true });
+                newGroups[newGroups.length - 1].images.push({ url: `photos/${photo.name}`, caption: '', display: true });
             } else {
-                newGroup.images = newGroup.images.filter(img => img.url !== `photos/${photo.name}`);
+                newGroups[newGroups.length - 1].images = newGroups[newGroups.length - 1].images.filter(img => img.url !== `photos/${photo.name}`);
             }
         };
 
@@ -41,11 +40,91 @@ function displayImagesForSelection(photos) {
 
         imageSelectionDiv.appendChild(container);
     });
+    document.getElementById('new-groups').appendChild(imageSelectionDiv);
 }
 
-function createGroup() {
-    newGroup.description = document.getElementById('group-description').value;
-    imageData.groups.push(newGroup);
+function addNewGroup() {
+    const newGroupContainer = document.createElement('div');
+    newGroupContainer.classList.add('group-container');
+
+    const descriptionInput = document.createElement('input');
+    descriptionInput.type = 'text';
+    descriptionInput.placeholder = 'Group Description';
+    newGroupContainer.appendChild(descriptionInput);
+
+    const newGroup = { description: '', images: [] };
+    newGroups.push(newGroup);
+
+    const createButton = document.createElement('button');
+    createButton.textContent = 'Create Group';
+    createButton.onclick = () => {
+        newGroup.description = descriptionInput.value;
+        document.getElementById('new-groups').removeChild(newGroupContainer);
+        displayNewGroups();
+    };
+    newGroupContainer.appendChild(createButton);
+
+    document.getElementById('new-groups').appendChild(newGroupContainer);
+    loadImagesForSelection();
+}
+
+function displayNewGroups() {
+    const newGroupsDiv = document.createElement('div');
+    newGroupsDiv.classList.add('new-groups');
+    newGroups.forEach((group, groupIndex) => {
+        const groupContainer = document.createElement('div');
+        groupContainer.classList.add('group-container');
+
+        const descriptionElement = document.createElement('h2');
+        descriptionElement.textContent = group.description;
+        groupContainer.appendChild(descriptionElement);
+
+        const imagesRow = document.createElement('div');
+        imagesRow.classList.add('images-row');
+        group.images.forEach((image, imageIndex) => {
+            const imgElement = document.createElement('img');
+            imgElement.src = image.url;
+            imgElement.alt = image.caption;
+            imgElement.style.maxWidth = '100px';
+
+            const captionInput = document.createElement('input');
+            captionInput.type = 'text';
+            captionInput.value = image.caption;
+            captionInput.oninput = (e) => newGroups[groupIndex].images[imageIndex].caption = e.target.value;
+
+            const displayCheckbox = document.createElement('input');
+            displayCheckbox.type = 'checkbox';
+            displayCheckbox.checked = image.display;
+            displayCheckbox.onchange = (e) => newGroups[groupIndex].images[imageIndex].display = e.target.checked;
+
+            const removeButton = document.createElement('button');
+            removeButton.textContent = 'Remove';
+            removeButton.onclick = () => {
+                newGroups[groupIndex].images.splice(imageIndex, 1);
+                displayNewGroups();
+            };
+
+            const container = document.createElement('div');
+            container.classList.add('admin-photo-container');
+            container.appendChild(imgElement);
+            container.appendChild(document.createTextNode(' Caption: '));
+            container.appendChild(captionInput);
+            container.appendChild(document.createTextNode(' Display: '));
+            container.appendChild(displayCheckbox);
+            container.appendChild(removeButton);
+
+            imagesRow.appendChild(container);
+        });
+
+        groupContainer.appendChild(imagesRow);
+        newGroupsDiv.appendChild(groupContainer);
+    });
+
+    document.getElementById('new-groups').appendChild(newGroupsDiv);
+}
+
+function saveChanges() {
+    imageData.groups.push(...newGroups);
 
     const blob = new Blob([JSON.stringify(imageData, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
@@ -54,7 +133,10 @@ function createGroup() {
     a.download = 'images.json';
     a.click();
     URL.revokeObjectURL(url);
-    alert('New group created! Download the file and replace the existing images.json in your repository.');
+    alert('New groups created! Download the file and replace the existing images.json in your repository.');
 }
 
-document.addEventListener('DOMContentLoaded', loadImagesForSelection);
+document.addEventListener('DOMContentLoaded', () => {
+    loadImagesForSelection();
+    addNewGroup();
+});

@@ -16,6 +16,8 @@ async function loadImages() {
             descriptionElement.textContent = group.description;
             groupContainer.appendChild(descriptionElement);
 
+            const imagesRow = document.createElement('div');
+            imagesRow.classList.add('images-row');
             group.images.forEach(image => {
                 if (image.display) {
                     const imgElement = document.createElement('img');
@@ -27,10 +29,11 @@ async function loadImages() {
                     imageContainer.classList.add('photo-container');
                     imageContainer.appendChild(imgElement);
                     imageContainer.appendChild(captionElement);
-                    groupContainer.appendChild(imageContainer);
+                    imagesRow.appendChild(imageContainer);
                 }
             });
 
+            groupContainer.appendChild(imagesRow);
             gallery.appendChild(groupContainer);
         });
     } catch (error) {

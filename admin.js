@@ -27,6 +27,8 @@ function displayGroupsForAdmin() {
         descriptionInput.oninput = (e) => group.description = e.target.value;
         groupContainer.appendChild(descriptionInput);
 
+        const imagesRow = document.createElement('div');
+        imagesRow.classList.add('images-row');
         group.images.forEach((image, imageIndex) => {
             const imgElement = document.createElement('img');
             imgElement.src = image.url;
@@ -59,8 +61,10 @@ function displayGroupsForAdmin() {
             container.appendChild(displayCheckbox);
             container.appendChild(removeButton);
 
-            groupContainer.appendChild(container);
+            imagesRow.appendChild(container);
         });
+
+        groupContainer.appendChild(imagesRow);
 
         const removeGroupButton = document.createElement('button');
         removeGroupButton.textContent = 'Remove Group';
