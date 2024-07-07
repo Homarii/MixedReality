@@ -4,23 +4,22 @@ let photoIndex = 0;
 const photosPerPage = 10;
 
 function loadPhotos() {
-    fetch('/photos/data.json')
-        .then(response => response.text())
+    fetch('photos.json')
+        .then(response => response.json())
         .then(data => {
-            const photos = data.trim().split('\n').map(line => JSON.parse(line));
-            displayPhotos(photos.slice(0, photosPerPage));
+            displayPhotos(data.slice(0, photosPerPage));
         });
 }
 
 function displayPhotos(photos) {
     const gallery = document.querySelector('.gallery');
     gallery.innerHTML = ''; // Clear existing photos
-    photos.forEach((photo, index) => {
+    photos.forEach(photo => {
         const photoDiv = document.createElement('div');
         photoDiv.classList.add('photo');
         
         const img = document.createElement('img');
-        img.src = `/photos/${photo.filename}`;
+        img.src = `photos/${photo.filename}`;
         photoDiv.appendChild(img);
         
         const description = document.createElement('div');
@@ -33,11 +32,10 @@ function displayPhotos(photos) {
 }
 
 function viewMore() {
-    fetch('/photos/data.json')
-        .then(response => response.text())
+    fetch('photos.json')
+        .then(response => response.json())
         .then(data => {
-            const photos = data.trim().split('\n').map(line => JSON.parse(line));
             photoIndex += photosPerPage;
-            displayPhotos(photos.slice(0, photoIndex + photosPerPage));
+            displayPhotos(data.slice(0, photoIndex + photosPerPage));
         });
 }

@@ -5,14 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Photo Gallery</title>
     <link rel="stylesheet" href="style.css">
+    <script src="admin.js"></script>
 </head>
 <body>
     <h1>Admin - Upload Photos</h1>
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="photos" accept="image/*" multiple required>
-        <input type="text" name="description" placeholder="Common Photo Description" required>
-        <button type="submit">Upload Photos</button>
-    </form>
-    <a href="/">Go to Gallery</a>
+    <div id="loginForm">
+        <form onsubmit="return login();">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    <div id="uploadForm" style="display: none;">
+        <form onsubmit="return uploadPhotos();">
+            <input type="file" id="photos" accept="image/*" multiple required>
+            <input type="text" id="description" placeholder="Common Photo Description" required>
+            <button type="submit">Upload Photos</button>
+        </form>
+        <a href="index.html">Go to Gallery</a>
+    </div>
 </body>
 </html>
