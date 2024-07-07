@@ -12,10 +12,6 @@ async function loadImages() {
             const groupContainer = document.createElement('div');
             groupContainer.classList.add('group-container');
 
-            const descriptionElement = document.createElement('h2');
-            descriptionElement.textContent = group.description;
-            groupContainer.appendChild(descriptionElement);
-
             const imagesRow = document.createElement('div');
             imagesRow.classList.add('images-row');
             group.images.forEach(image => {
@@ -34,6 +30,12 @@ async function loadImages() {
             });
 
             groupContainer.appendChild(imagesRow);
+
+            const descriptionElement = document.createElement('p');
+            descriptionElement.classList.add('group-description');
+            descriptionElement.textContent = group.description;
+            groupContainer.appendChild(descriptionElement);
+
             gallery.appendChild(groupContainer);
         });
     } catch (error) {

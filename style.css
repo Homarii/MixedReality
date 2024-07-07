@@ -26,18 +26,11 @@ h1 {
     width: 100%;
 }
 
-.group-container h2 {
-    text-align: center;
-    font-size: 1.5em;
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.images-row {
+.group-container .images-row {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .photo-container {
@@ -48,8 +41,8 @@ h1 {
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    flex: 1 1 calc(33.333% - 40px); /* Adjust the percentage to control the number of images per row */
-    max-width: calc(33.333% - 40px);
+    flex: 1 1 calc(25% - 40px); /* Adjust the percentage to control the number of images per row */
+    max-width: calc(25% - 40px);
 }
 
 .photo-container img {
@@ -61,18 +54,35 @@ h1 {
 .photo-container p {
     margin-top: 10px;
     color: #666;
-    font-size: 1em;
+    font-size: 0.9em;
     text-align: center;
 }
 
-a {
+.group-description {
+    text-align: center;
+    font-size: 1em;
+    margin-top: 10px;
+    color: #333;
+}
+
+a.admin-login {
     color: #007bff;
     text-decoration: none;
     margin: 20px 0;
+    position: fixed;
+    top: 20px;
+    right: 20px;
 }
 
-a:hover {
+a.admin-login:hover {
     text-decoration: underline;
+}
+
+@media (max-width: 1024px) {
+    .photo-container {
+        flex: 1 1 calc(33.333% - 40px);
+        max-width: calc(33.333% - 40px);
+    }
 }
 
 @media (max-width: 768px) {
