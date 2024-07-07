@@ -1,12 +1,17 @@
-let imageData = [];
+let imageData = {
+    images: []
+};
 
 async function loadImagesForAdmin() {
     try {
+        // Fetch existing image metadata
         const response = await fetch('images.json');
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         imageData = await response.json();
+
+        // Display images for management
         displayImagesForAdmin();
     } catch (error) {
         console.error('Error loading images for admin:', error);
