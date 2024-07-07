@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-    if (document.getElementById('uploadForm').style.display === 'block') {
+    if (sessionStorage.getItem('loggedIn') === 'true') {
+        document.getElementById('loginForm').style.display = 'none';
+        document.getElementById('uploadForm').style.display = 'block';
         loadAdminPhotos();
     }
 });
@@ -9,6 +11,7 @@ function login() {
     const password = document.getElementById('password').value;
 
     if (username === 'demo' && password === 'demo') {
+        sessionStorage.setItem('loggedIn', 'true');
         document.getElementById('loginForm').style.display = 'none';
         document.getElementById('uploadForm').style.display = 'block';
         loadAdminPhotos();
@@ -105,5 +108,4 @@ function deletePhoto(index) {
     let photos = JSON.parse(localStorage.getItem('photos')) || [];
     if (confirm("Are you sure you want to delete this photo?")) {
         photos.splice(index, 1);
-        localStorage.setItem('photos', JSON.stringify(photos));
-        load
+   
