@@ -1,45 +1,65 @@
-document.addEventListener('DOMContentLoaded', loadPhotos);
+// gallery.js
 
-let photoIndex = 0;
-const photosPerPage = 10;
+async function uploadPhotos() {
+    const files = document.getElementById('photos').files;
+    const description = document.getElementById('description').value;
 
-function loadPhotos() {
-    let photos = JSON.parse(localStorage.getItem('photos')) || [];
-    displayPhotos(photos.slice(0, photosPerPage));
+    if (files.length === 0) {
+        alert("Please select files to upload.");
+        return false;
+    }
+
+    for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        await uploadFileToGitHub(file, description);
+    }
+
+    alert("Photos uploaded successfully!");
+    loadImages(); // Refresh the gallery
+    return false;
 }
 
-function displayPhotos(photos) {
-    const gallery = document.querySelector('.gallery');
-    gallery.innerHTML = ''; // Clear existing photos
-    let currentGroup = null;
-    photos.forEach((photo, index) => {
-        if (!currentGroup || currentGroup.description !== photo.description) {
-            currentGroup = document.createElement('div');
-            currentGroup.classList.add('photo-group');
-            currentGroup.description = photo.description;
+async function uploadFileToGitHub(file, description) {
+    const reader = new FileReader();
+    reader.onload = async function(event) {
+        const content = btoa(event.target.result); // Base64 encode the file content
+        const filePath = `photos/${file.name}`;
+        const token = 'YOUR_GITHUB_TOKEN'; // Replace with your GitHub token
+        const repo = 'YOUR_USERNAME/YOUR_REPO'; // Replace with your repo details
 
-            const description = document.createElement('div');
-            description.classList.add('description');
-            description.textContent = photo.description;
-            currentGroup.appendChild(description);
+        const response = await fetch(`https://api.github.com/repos/${repo}/contents/${filePath}`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `token ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                message: `Upload ${file.name} - ${description}`,
+                content: content
+            })
+        });
 
-            gallery.appendChild(currentGroup);
+        if (!response.ok) {
+            throw new Error(`Failed to upload ${file.name}: ${response.statusText}`);
         }
+    };
+    reader.readAsBinaryString(file);
+}
 
-        const photoDiv = document.createElement('div');
-        photoDiv.classList.add('photo');
-        
+async function loadImages() {
+    const repo = 'homarii/MixedReality'; // Replace with your repo details
+    const response = await fetch(`https://api.github.com/repos/${repo}/contents/photos`);
+    const images = await response.json();
+
+    const gallery = document.querySelector('.gallery');
+    gallery.innerHTML = ''; // Clear existing images
+
+    images.forEach(image => {
         const img = document.createElement('img');
-        img.src = photo.data;
-        img.alt = photo.filename; // Adding alt attribute for better accessibility
-        photoDiv.appendChild(img);
-        
-        currentGroup.appendChild(photoDiv);
+        img.src = image.download_url;
+        img.alt = image.name;
+        gallery.appendChild(img);
     });
 }
 
-function viewMore() {
-    let photos = JSON.parse(localStorage.getItem('photos')) || [];
-    photoIndex += photosPerPage;
-    displayPhotos(photos.slice(0, photoIndex + photosPerPage));
-}
+document.addEventListener('DOMContentLoaded', loadImages);

@@ -1,17 +1,23 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photo Gallery</title>
+    <title>Mixed Reality</title>
     <link rel="stylesheet" href="style.css">
     <script src="gallery.js" defer></script>
 </head>
 <body>
-    <h1>Photo Gallery</h1>
+    <h1>Mixed Reality</h1>
     <div class="gallery">
         <!-- Photo groups will be added here -->
     </div>
+    <form id="uploadForm" onsubmit="return uploadPhotos();">
+        <input type="file" id="photos" accept="image/*" multiple required>
+        <input type="text" id="description" placeholder="Common Photo Description" required>
+        <button type="submit">Upload Photos</button>
+    </form>
     <button onclick="viewMore()">View More</button>
     <a href="admin-login.html">Admin Login</a>
 </body>
