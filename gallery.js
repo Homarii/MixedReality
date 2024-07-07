@@ -1,5 +1,5 @@
 async function loadImages() {
-    const response = await fetch('https://raw.githubusercontent.com/homarii/MixedReality/main/images.json'); // Adjust path if necessary
+    const response = await fetch('https://github.com/Homarii/MixedReality/blob/main/images.json'); // Adjust path if necessary
     const imageData = await response.json();
     const gallery = document.querySelector('.gallery');
     gallery.innerHTML = ''; // Clear existing images
