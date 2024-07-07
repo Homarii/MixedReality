@@ -1,4 +1,8 @@
-document.addEventListener('DOMContentLoaded', loadAdminPhotos);
+document.addEventListener('DOMContentLoaded', () => {
+    if (document.getElementById('uploadForm').style.display === 'block') {
+        loadAdminPhotos();
+    }
+});
 
 function login() {
     const username = document.getElementById('username').value;
@@ -98,4 +102,8 @@ function editDescription(description) {
 }
 
 function deletePhoto(index) {
-    
+    let photos = JSON.parse(localStorage.getItem('photos')) || [];
+    if (confirm("Are you sure you want to delete this photo?")) {
+        photos.splice(index, 1);
+        localStorage.setItem('photos', JSON.stringify(photos));
+        load
