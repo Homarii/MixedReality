@@ -2,10 +2,10 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #f4f4f9;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f4f4f9;
 }
 
 h1 {
@@ -15,91 +15,76 @@ h1 {
     text-align: center;
 }
 
-.gallery, .admin-gallery, .new-groups {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 20px;
+.gallery {
     width: 90%;
     max-width: 1000px;
+    margin: 20px 0;
 }
 
 .group-container {
+    margin-bottom: 40px;
     width: 100%;
+}
+
+.group-container h2 {
+    text-align: center;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #333;
 }
 
 .images-row {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
 }
 
-.photo-container, .admin-photo-container, .image-selection-container {
+.photo-container {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 10px;
     margin: 10px;
     background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
+    flex: 1 1 calc(33.333% - 40px); /* Adjust the percentage to control the number of images per row */
+    max-width: calc(33.333% - 40px);
 }
 
-.photo-container img, .admin-photo-container img, .image-selection-container img {
+.photo-container img {
     width: 100%;
     height: auto;
     border-radius: 8px;
 }
 
-.admin-photo-container input[type="text"], .image-selection-container input[type="text"] {
-    margin-right: 10px;
-}
-
-.admin-photo-container input[type="checkbox"], .image-selection-container input[type="checkbox"] {
-    margin-left: 10px;
-}
-
-button {
-    margin: 5px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    cursor: pointer;
-    background-color: #007bff;
-    color: #fff;
+.photo-container p {
+    margin-top: 10px;
+    color: #666;
     font-size: 1em;
-}
-
-button:hover {
-    background-color: #0056b3;
+    text-align: center;
 }
 
 a {
     color: #007bff;
     text-decoration: none;
+    margin: 20px 0;
 }
 
 a:hover {
     text-decoration: underline;
 }
 
-#login-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 50px;
+@media (max-width: 768px) {
+    .photo-container {
+        flex: 1 1 calc(50% - 40px);
+        max-width: calc(50% - 40px);
+    }
 }
 
-#login-form input {
-    margin: 10px;
-    padding: 10px;
-    width: 200px;
-}
-
-#login-form button {
-    padding: 10px 20px;
-}
-
-@media (max-width: 600px) {
-    .photo-container, .admin-photo-container, .image-selection-container {
-        width: 100%;
+@media (max-width: 480px) {
+    .photo-container {
+        flex: 1 1 100%;
+        max-width: 100%;
     }
 }
