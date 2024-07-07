@@ -1,10 +1,16 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #f4f4f9;
+}
+
+h1 {
+    margin-top: 20px;
+    color: #333;
 }
 
 .gallery {
@@ -20,6 +26,12 @@ body {
     border-radius: 8px;
     overflow: hidden;
     width: 300px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.photo:hover {
+    transform: scale(1.05);
 }
 
 .photo img {
@@ -30,6 +42,7 @@ body {
 .description {
     padding: 10px;
     text-align: center;
+    background-color: #fff;
 }
 
 .form-container {
@@ -38,4 +51,18 @@ body {
 
 .form-container input, .form-container button {
     margin: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-container button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.form-container button:hover {
+    background-color: #218838;
 }

@@ -1,13 +1,22 @@
 let photos = [];
 
 function addPhoto() {
-    const url = document.getElementById('photo-url').value;
-    const description = document.getElementById('photo-description').value;
-    if (url && description) {
-        photos.push({ url, description });
-        renderPhotos();
-        document.getElementById('photo-url').value = '';
-        document.getElementById('photo-description').value = '';
+    const fileInput = document.getElementById('photo-file');
+    const descriptionInput = document.getElementById('photo-description');
+    const file = fileInput.files[0];
+    const description = descriptionInput.value;
+
+    if (file && description) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            photos.push({ url: event.target.result, description });
+            renderPhotos();
+            fileInput.value = '';
+            descriptionInput.value = '';
+        }
+        reader.readAsDataURL(file);
+    } else {
+        alert('Please select a file and enter a description.');
     }
 }
 
