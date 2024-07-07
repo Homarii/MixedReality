@@ -34,42 +34,67 @@
             padding: 10px;
             text-align: center;
         }
+        .form-container {
+            margin: 20px;
+        }
+        .form-container input, .form-container button {
+            margin: 5px;
+        }
     </style>
 </head>
 <body>
     <h1>Photo Gallery</h1>
+    <div class="form-container">
+        <input type="text" id="photo-url" placeholder="Photo URL">
+        <input type="text" id="photo-description" placeholder="Photo Description">
+        <button onclick="addPhoto()">Add Photo</button>
+    </div>
     <div class="gallery">
         <!-- Photos will be added here -->
     </div>
     <script>
-        const photos = [
-            {
-                url: 'photos/photo1.jpg',
-                description: 'Description for Photo 1'
-            },
-            {
-                url: 'photos/photo2.jpg',
-                description: 'Description for Photo 2'
+        let photos = [];
+
+        function addPhoto() {
+            const url = document.getElementById('photo-url').value;
+            const description = document.getElementById('photo-description').value;
+            if (url && description) {
+                photos.push({ url, description });
+                renderPhotos();
+                document.getElementById('photo-url').value = '';
+                document.getElementById('photo-description').value = '';
             }
-        ];
+        }
 
-        const gallery = document.querySelector('.gallery');
+        function deletePhoto(index) {
+            photos.splice(index, 1);
+            renderPhotos();
+        }
 
-        photos.forEach(photo => {
-            const photoDiv = document.createElement('div');
-            photoDiv.classList.add('photo');
+        function renderPhotos() {
+            const gallery = document.querySelector('.gallery');
+            gallery.innerHTML = '';
+            photos.forEach((photo, index) => {
+                const photoDiv = document.createElement('div');
+                photoDiv.classList.add('photo');
 
-            const img = document.createElement('img');
-            img.src = photo.url;
+                const img = document.createElement('img');
+                img.src = photo.url;
 
-            const desc = document.createElement('div');
-            desc.classList.add('description');
-            desc.textContent = photo.description;
+                const desc = document.createElement('div');
+                desc.classList.add('description');
+                desc.textContent = photo.description;
 
-            photoDiv.appendChild(img);
-            photoDiv.appendChild(desc);
-            gallery.appendChild(photoDiv);
-        });
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.onclick = () => deletePhoto(index);
+
+                photoDiv.appendChild(img);
+                photoDiv.appendChild(desc);
+                photoDiv.appendChild(deleteButton);
+                gallery.appendChild(photoDiv);
+            });
+        }
     </script>
 </body>
 </html>
