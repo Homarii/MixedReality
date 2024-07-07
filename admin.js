@@ -2,7 +2,7 @@ function login() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    if (username === 'admin' && password === 'password') { // Replace with your credentials
+    if (username === 'demo' && password === 'demo') { // Set to 'demo' for both username and password
         document.getElementById('loginForm').style.display = 'none';
         document.getElementById('uploadForm').style.display = 'block';
     } else {
