@@ -1,45 +1,34 @@
-document.addEventListener('DOMContentLoaded', loadPhotos);
-
-let photoIndex = 0;
-const photosPerPage = 10;
-
-function loadPhotos() {
-    let photos = JSON.parse(localStorage.getItem('photos')) || [];
-    displayPhotos(photos.slice(0, photosPerPage));
-}
-
-function displayPhotos(photos) {
+document.addEventListener('DOMContentLoaded', () => {
     const gallery = document.querySelector('.gallery');
-    gallery.innerHTML = ''; // Clear existing photos
-    let currentGroup = null;
-    photos.forEach((photo, index) => {
-        if (!currentGroup || currentGroup.description !== photo.description) {
-            currentGroup = document.createElement('div');
-            currentGroup.classList.add('photo-group');
-            currentGroup.description = photo.description;
 
-            const description = document.createElement('div');
-            description.classList.add('description');
-            description.textContent = photo.description;
-            currentGroup.appendChild(description);
+    // Fetch photo data from the server or a local file (assuming JSON format)
+    fetch('photos.json')
+        .then(response => response.json())
+        .then(data => {
+            data.photos.forEach(photo => {
+                const photoGroup = document.createElement('div');
+                photoGroup.className = 'photo-group';
 
-            gallery.appendChild(currentGroup);
-        }
+                const photoDiv = document.createElement('div');
+                photoDiv.className = 'photo';
 
-        const photoDiv = document.createElement('div');
-        photoDiv.classList.add('photo');
-        
-        const img = document.createElement('img');
-        img.src = photo.data;
-        img.alt = photo.filename; // Adding alt attribute for better accessibility
-        photoDiv.appendChild(img);
-        
-        currentGroup.appendChild(photoDiv);
-    });
-}
+                const img = document.createElement('img');
+                img.src = photo.src;
+                img.alt = 'Photo';
+
+                const caption = document.createElement('p');
+                caption.className = 'caption';
+                caption.textContent = photo.caption;
+
+                photoDiv.appendChild(img);
+                photoDiv.appendChild(caption);
+                photoGroup.appendChild(photoDiv);
+                gallery.appendChild(photoGroup);
+            });
+        })
+        .catch(error => console.error('Error loading photos:', error));
+});
 
 function viewMore() {
-    let photos = JSON.parse(localStorage.getItem('photos')) || [];
-    photoIndex += photosPerPage;
-    displayPhotos(photos.slice(0, photoIndex + photosPerPage));
+    // Functionality to load more photos
 }

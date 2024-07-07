@@ -32,19 +32,17 @@ h1 {
     width: 100%;
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.photo-group .description {
-    font-weight: bold;
-    margin-bottom: 10px;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .photo-group .photo {
     margin: 10px;
-    display: inline-block;
-    vertical-align: top;
-    width: calc(33.333% - 20px); /* Three photos per row, accounting for margins */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
     box-sizing: border-box;
 }
 
@@ -54,19 +52,12 @@ h1 {
     border-radius: 8px;
 }
 
-.photo-group .photo button {
-    display: block;
-    margin: 5px 0;
-    width: 100%;
-    border-radius: 4px;
-    background-color: #dc3545;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-}
-
-.photo-group .photo button:hover {
-    background-color: #c82333;
+.photo-group .caption {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: normal;
+    padding: 0 10px;
+    color: #555;
 }
 
 button {
@@ -84,29 +75,6 @@ button:hover {
     background-color: #0056b3;
 }
 
-.form-container {
-    margin: 20px;
-}
-
-.form-container input, .form-container button {
-    margin: 5px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1em;
-}
-
-.form-container button {
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-}
-
-.form-container button:hover {
-    background-color: #218838;
-}
-
 a {
     color: #007bff;
     text-decoration: none;
@@ -118,9 +86,11 @@ a:hover {
 
 /* Responsive design for mobile devices */
 @media (max-width: 600px) {
+    .photo-group {
+        width: 100%;
+    }
     .photo-group .photo {
         width: 100%;
-        margin: 5px 0;
     }
     .gallery, .admin-gallery {
         width: 100%;
