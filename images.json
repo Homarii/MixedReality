@@ -1,15 +1,10 @@
 {
   "groups": [
     {
-      "description": "",
+      "description": "The provided images depict knee joint moments over one pedal cycle for various participants, showing variability in peak amplitudes and timing. In the first image, participants P13, P07, and P05 exhibit the highest peak moments around 2500 Nm, with P13 showing the highest values. The second image shows participants P01, P11, and P14 with peak moments around 1000 Nm, where P14 has the highest peaks. The third image includes participants P03, P04, P06, P08, and P16, with peak moments around 1500 Nm, and P08 displaying the highest values. The fourth image shows participants P02, P09, P10, and P12 with peak moments around 2000 Nm, with P12 having the highest peaks. These plots illustrate individual differences in knee joint biomechanics during the pedal cycle, reflected in the variability of peak moments and their timing.",
       "images": [
         {
           "url": "photos/1_1_P13_moment_P07_moment_P05_moment.png",
-          "caption": "",
-          "display": true
-        },
-        {
-          "url": "photos/1_2_P13_force_P07_force_P05_force.png",
           "caption": "",
           "display": true
         },
@@ -31,13 +26,8 @@
       ]
     },
     {
-      "description": "Forces",
+      "description": "The provided images illustrate knee joint forces over one pedal cycle for various participants, showing variability in peak forces and timing. In the first image, participants P13, P07, and P05 exhibit peak forces around 2500 N, with P13 showing the highest values. The second image shows participants P01, P11, and P14 with peak forces around 1000 N, where P14 has the highest peaks. The third image includes participants P03, P04, P06, P08, and P16, with peak forces around 1500 N, and P08 displaying the highest values. The fourth image shows participants P02, P09, P10, and P12 with peak forces around 2000 N, with P12 having the highest peaks. These plots highlight individual differences in knee joint forces during the pedal cycle, reflected in the variability of peak forces and their timing.",
       "images": [
-        {
-          "url": "photos/4_1_P02_moment_P09_moment_P10_moment_P12_moment.png",
-          "caption": "",
-          "display": true
-        },
         {
           "url": "photos/2_2_P01_force_P11_force_P14_force.png",
           "caption": "",
