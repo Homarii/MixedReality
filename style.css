@@ -44,13 +44,12 @@ h1 {
     margin: 10px;
     display: inline-block;
     vertical-align: top;
-    width: 100%; /* Ensure the photos take up full width on smaller screens */
-    text-align: center;
+    width: calc(33.333% - 20px); /* Three photos per row, accounting for margins */
+    box-sizing: border-box;
 }
 
 .photo-group .photo img {
     width: 100%;
-    max-width: 200px; /* Limit maximum width for large screens */
     height: auto;
     border-radius: 8px;
 }
@@ -119,8 +118,9 @@ a:hover {
 
 /* Responsive design for mobile devices */
 @media (max-width: 600px) {
-    .photo-group .photo img {
-        max-width: 100%;
+    .photo-group .photo {
+        width: 100%;
+        margin: 5px 0;
     }
     .gallery, .admin-gallery {
         width: 100%;

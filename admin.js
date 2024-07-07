@@ -63,6 +63,7 @@ function displayAdminPhotos(photos) {
         
         const img = document.createElement('img');
         img.src = photo.data;
+        img.alt = photo.filename; // Adding alt attribute for better accessibility
         photoDiv.appendChild(img);
 
         const deleteButton = document.createElement('button');
