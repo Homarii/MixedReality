@@ -2,41 +2,15 @@ let imageData = { groups: [] };
 
 async function loadImagesForAdmin() {
     try {
-        // Fetch existing image metadata
         const response = await fetch('images.json');
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         imageData = await response.json();
-
-        // Fetch the list of images from the photos directory
-        const photosResponse = await fetch('https://api.github.com/repos/Homarii/MixedReality/contents/photos');
-        if (!photosResponse.ok) {
-            throw new Error(`HTTP error! Status: ${photosResponse.status}`);
-        }
-        const photos = await photosResponse.json();
-
-        const photosUrls = photos.map(photo => `photos/${photo.name}`);
-        updateImagesWithNewPhotos(photosUrls);
-
         displayGroupsForAdmin();
     } catch (error) {
         console.error('Error loading images for admin:', error);
     }
-}
-
-function updateImagesWithNewPhotos(photosUrls) {
-    const existingImagesUrls = imageData.groups.flatMap(group => group.images.map(img => img.url));
-    const newImagesUrls = photosUrls.filter(url => !existingImagesUrls.includes(url));
-
-    newImagesUrls.forEach(url => {
-        const newImage = { url, caption: '', display: false };
-        if (imageData.groups.length === 0) {
-            imageData.groups.push({ description: 'New Group', images: [newImage] });
-        } else {
-            imageData.groups[0].images.push(newImage);
-        }
-    });
 }
 
 function displayGroupsForAdmin() {
@@ -88,14 +62,6 @@ function displayGroupsForAdmin() {
             groupContainer.appendChild(container);
         });
 
-        const addImageButton = document.createElement('button');
-        addImageButton.textContent = 'Add Image';
-        addImageButton.onclick = () => {
-            group.images.push({ url: '', caption: '', display: false });
-            displayGroupsForAdmin();
-        };
-        groupContainer.appendChild(addImageButton);
-
         const removeGroupButton = document.createElement('button');
         removeGroupButton.textContent = 'Remove Group';
         removeGroupButton.onclick = () => {
@@ -130,14 +96,6 @@ function displayGroupsForAdmin() {
 
         groupManagementDiv.appendChild(groupContainer);
     });
-
-    const addGroupButton = document.createElement('button');
-    addGroupButton.textContent = 'Add Group';
-    addGroupButton.onclick = () => {
-        imageData.groups.push({ description: 'New Group', images: [] });
-        displayGroupsForAdmin();
-    };
-    groupManagementDiv.appendChild(addGroupButton);
 }
 
 function saveChanges() {

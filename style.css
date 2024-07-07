@@ -24,7 +24,7 @@ h1 {
     max-width: 1000px;
 }
 
-.photo-container, .admin-photo-container {
+.photo-container, .admin-photo-container, .image-selection-container {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 10px;
@@ -35,17 +35,17 @@ h1 {
     text-align: center;
 }
 
-.photo-container img, .admin-photo-container img {
+.photo-container img, .admin-photo-container img, .image-selection-container img {
     width: 100%;
     height: auto;
     border-radius: 8px;
 }
 
-.admin-photo-container input[type="text"] {
+.admin-photo-container input[type="text"], .image-selection-container input[type="text"] {
     margin-right: 10px;
 }
 
-.admin-photo-container input[type="checkbox"] {
+.admin-photo-container input[type="checkbox"], .image-selection-container input[type="checkbox"] {
     margin-left: 10px;
 }
 
@@ -74,7 +74,7 @@ a:hover {
 }
 
 @media (max-width: 600px) {
-    .photo-container, .admin-photo-container {
+    .photo-container, .admin-photo-container, .image-selection-container {
         width: 100%;
     }
 }
