@@ -1,12 +1,12 @@
 {
     "images": [
         {
-            "url": "photos/photo1.jpg",
+            "url": "photos/1_1_P13_moment_P07_moment_P05_moment.png",
             "caption": "Photo 1",
             "display": true
         },
         {
-            "url": "photos/photo2.jpg",
+            "url": "photos/1_2_P13_force_P07_force_P05_force.png",
             "caption": "Photo 2",
             "display": false
         }
