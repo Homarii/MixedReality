@@ -4,43 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Photo Gallery</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .gallery {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin: 20px;
-        }
-        .photo {
-            margin: 10px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            overflow: hidden;
-            width: 300px;
-        }
-        .photo img {
-            width: 100%;
-            height: auto;
-        }
-        .description {
-            padding: 10px;
-            text-align: center;
-        }
-        .form-container {
-            margin: 20px;
-        }
-        .form-container input, .form-container button {
-            margin: 5px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Photo Gallery</h1>
@@ -52,49 +16,6 @@
     <div class="gallery">
         <!-- Photos will be added here -->
     </div>
-    <script>
-        let photos = [];
-
-        function addPhoto() {
-            const url = document.getElementById('photo-url').value;
-            const description = document.getElementById('photo-description').value;
-            if (url && description) {
-                photos.push({ url, description });
-                renderPhotos();
-                document.getElementById('photo-url').value = '';
-                document.getElementById('photo-description').value = '';
-            }
-        }
-
-        function deletePhoto(index) {
-            photos.splice(index, 1);
-            renderPhotos();
-        }
-
-        function renderPhotos() {
-            const gallery = document.querySelector('.gallery');
-            gallery.innerHTML = '';
-            photos.forEach((photo, index) => {
-                const photoDiv = document.createElement('div');
-                photoDiv.classList.add('photo');
-
-                const img = document.createElement('img');
-                img.src = photo.url;
-
-                const desc = document.createElement('div');
-                desc.classList.add('description');
-                desc.textContent = photo.description;
-
-                const deleteButton = document.createElement('button');
-                deleteButton.textContent = 'Delete';
-                deleteButton.onclick = () => deletePhoto(index);
-
-                photoDiv.appendChild(img);
-                photoDiv.appendChild(desc);
-                photoDiv.appendChild(deleteButton);
-                gallery.appendChild(photoDiv);
-            });
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
