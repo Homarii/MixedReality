@@ -1,7 +1,7 @@
 {
   "groups": [
     {
-      "description": "",
+      "description": "The analysis of cycling moments shows how different cyclists experience forces on their knee joints. Across all groups, the knee joint moments follow a similar pattern, dipping around 20 and 100 seconds and peaking near 60 seconds. However, the intensity of these moments varies. The first group (P01, P11, P14) experiences the least force, peaking around 1000 Nm, while the third group (P03, P04, P06, P08, P16) hits about 1500 Nm. The second group (P02, P09, P10, P12) peaks around 2000 Nm, and the fourth group (P13, P07, P05) feels the most intense moments, peaking at 2500 Nm. These differences highlight how each cyclist's body responds uniquely to the demands of cycling, which can help tailor training and injury prevention to individual needs.",
       "images": [
         {
           "url": "photos/1_1_P13_moment_P07_moment_P05_moment.png",
@@ -26,7 +26,7 @@
       ]
     },
     {
-      "description": "Knee Joint Forces",
+      "description": "The analysis of cycling inverse dynamics forces for participants grouped by moment amplitudes shows consistent patterns across all groups, with dips around 40 seconds and peaks near 80 seconds, reflecting common biomechanical responses during cycling. Group 1 (P01, P11, P14) experiences the lowest forces, ranging from -1200 N to 200 N. Group 3 (P03, P04, P06, P08, P16) has moderate forces in the same range. Group 2 (P02, P09, P10, P12) and Group 4 (P13, P07, P05) experience higher forces, peaking around -1400 N to 200 N, with Group 4 facing the highest forces. These variations indicate differing levels of knee joint stress, essential for tailoring training and injury prevention strategies.",
       "images": [
         {
           "url": "photos/1_2_P13_force_P07_force_P05_force.png",
@@ -51,7 +51,7 @@
       ]
     },
     {
-      "description": "Knee Joint Reaction Forces",
+      "description": "The analysis of knee joint reaction forces for participants, grouped by moment amplitudes, shows varying force magnitudes over a pedal cycle. Group 1 (P01, P11, P14) experiences reaction forces ranging from -1500 N to -500 N, with multiple peaks and troughs indicating variable forces. Group 2 (P03, P04, P06, P08, P16) has forces from -2500 N to -500 N, displaying more pronounced fluctuations. Group 3 (P02, P09, P10, P12) ranges from -2000 N to -500 N, with significant variation in forces. Group 4 (P13, P07, P05) faces the highest forces, ranging from -3000 N to -500 N, showing the deepest troughs and highest peaks. These variations indicate that cyclists with higher moment amplitudes experience greater knee joint reaction forces, which is crucial for tailoring training and preventing injuries.",
       "images": [
         {
           "url": "photos/Peak_Amplitude_around_1000.png",
@@ -76,7 +76,7 @@
       ]
     },
     {
-      "description": "Average Activation and Forces for Biceps Femoris",
+      "description": "The average muscle forces and activation for the Biceps Femoris, grouped by peak moment amplitudes, show distinct patterns over a pedal cycle. For Group 1 (peak amplitude around 1000 Nm), both activation and force fluctuate with peaks and troughs, reflecting moderate muscle engagement. Group 2 (1500 Nm) shows similar trends but with slightly higher average forces, indicating increased muscle effort. Group 3 (2000 Nm) demonstrates a consistent pattern of muscle activation closely following force peaks, suggesting coordinated muscle usage under higher loads. Group 4 (2500 Nm) exhibits the highest average forces and activation levels, with pronounced peaks, indicating the greatest muscle effort among the groups.",
       "images": [
         {
           "url": "photos/Peak_Amplitude_around_1000_Biceps_Femoris_averages.png",
@@ -101,7 +101,7 @@
       ]
     },
     {
-      "description": "Activations and Forces for Rectus Femoris",
+      "description": "The average muscle forces and activation for the Rectus Femoris, grouped by peak moment amplitudes, exhibit distinct patterns over a pedal cycle. For Group 1 (peak amplitude around 1000 Nm), activation and force show moderate fluctuations, with force peaking around 400 N and activation around 0.6. Group 2 (1500 Nm) shows similar trends but with slightly higher average forces and more pronounced peaks. Group 3 (2000 Nm) demonstrates consistent patterns of muscle activation closely following force peaks, with forces around 400 N, indicating coordinated muscle usage under higher loads. Group 4 (2500 Nm) exhibits the highest average forces, peaking around 800 N, and activation levels, showing the greatest muscle effort among the groups.",
       "images": [
         {
           "url": "photos/Peak_Amplitude_around_1000_Rectus_Femoris_averages.png",
@@ -126,7 +126,7 @@
       ]
     },
     {
-      "description": "Activations and Forces for Gastrocnemius",
+      "description": "The average muscle forces and activation for the Gastrocnemius muscle, grouped by peak moment amplitudes, show distinct patterns over a pedal cycle. For Group 1 (peak amplitude around 1000 Nm), the activation and force display moderate fluctuations, with forces peaking around 400 N and activation levels around 0.2. Group 2 (1500 Nm) demonstrates similar trends but with slightly higher average forces, reflecting increased muscle effort. Group 3 (2000 Nm) shows a more pronounced pattern of muscle activation and forces, with peaks aligning closely, indicating coordinated muscle usage under higher loads. Group 4 (2500 Nm) exhibits the highest average forces, peaking around 600 N, and activation levels, indicating the greatest muscle effort among the groups.",
       "images": [
         {
           "url": "photos/Peak_Amplitude_around_1000_Gastrocnemius_averages.png",
@@ -151,7 +151,7 @@
       ]
     },
     {
-      "description": "Activations and Forces for Vastus Lateralis",
+      "description": "The average muscle forces and activation for the Vastus Lateralis, grouped by peak moment amplitudes, reveal specific patterns over a pedal cycle. For Group 1 (peak amplitude around 1000 Nm), the activation and force exhibit moderate fluctuations, with force peaking around 400 N and activation levels around 0.6. Group 2 (1500 Nm) shows similar trends but with more pronounced peaks, indicating slightly higher average forces. Group 3 (2000 Nm) demonstrates a distinct pattern of muscle activation closely following force peaks, with forces around 800 N, reflecting coordinated muscle usage under increased loads. Group 4 (2500 Nm) exhibits the highest average forces, peaking around 1000 N, and the highest activation levels, indicating the greatest muscle effort among the groups.",
       "images": [
         {
           "url": "photos/Peak_Amplitude_around_1000_Vastus_Lateralis_averages.png",
@@ -174,10 +174,6 @@
           "display": true
         }
       ]
-    },
-    {
-      "description": "",
-      "images": []
     }
   ]
 }
